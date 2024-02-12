@@ -1,0 +1,187 @@
+------------------------------------------- 
+Enter initial balance for Savings Account: 10000
+
+Enter initial balance for Checking Account: 500
+
+Enter overdraft limit for Checking Account: 100000
+
+Savings Account Transactions:
+
+ATM Menu:
+
+1. Check Balance
+
+2. Deposit
+
+3. Withdraw
+
+4. Exit
+
+Enter your choice: 2 Enter deposit amount: 5000
+
+Deposit Successful. New balance: 15000.0
+------------------------------------------------------------- 
+ATM Menu:
+
+
+1. Check Balance
+
+
+2. Deposit
+
+
+3. Withdraw
+
+
+4. Exit
+
+
+Enter your choice: 1
+
+
+Current Balance: 15000.0
+------------------------------------------- 
+ATM Menu:
+
+
+1. Check Balance
+
+
+2. Deposit
+
+
+3. Withdraw
+
+
+4. Exit
+
+
+Enter your choice: 3
+
+Enter withdrawal amount: 8000
+
+Withdrawal Successful. New balance: 7000.0
+
+
+------------------------------------------------------------- 
+ATM Menu:
+
+
+1. Check Balance
+
+
+2. Deposit
+
+
+3. Withdraw
+
+
+4. Exit
+
+
+Enter your choice: 1
+
+
+Current Balance: 7000.0
+------------------------------------------- 
+ATM Menu:
+
+
+1. Check Balance
+
+
+2. Deposit
+
+
+3. Withdraw
+
+
+4. Exit
+
+
+Enter your choice: 6
+
+
+Invalid choice. Please try again.
+------------------------------------------------------------- 
+ATM Menu:
+
+
+1. Check Balance
+
+
+2. Deposit
+
+
+3. Withdraw
+
+
+4. Exit
+
+
+Enter your choice: 3
+
+
+Enter withdrawal amount: 8000
+
+
+Error: Insufficient funds for withdrawal
+------------------------------------------- 
+ATM Menu:
+
+
+1. Check Balance
+
+
+2. Deposit
+
+
+3. Withdraw
+
+
+4. Exit
+
+
+Enter your choice: 2
+
+
+Enter deposit amount: 5000
+
+
+Deposit Successful. New balance: 12000.0
+------------------------------------------------------------- 
+ATM Menu:
+
+1. Check Balance
+
+2. Deposit
+
+3. Withdraw
+
+4. Exit
+
+Enter your choice: 1
+
+Current Balance: 12000.0
+
+------------------------------------------- 
+ATM Menu:
+
+
+1. Check Balance
+
+
+2. Deposit
+
+
+3. Withdraw
+
+
+4. Exit
+
+
+Enter your choice: 4
+
+
+Exiting ATM. Thank you!
+
