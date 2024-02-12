@@ -1,0 +1,180 @@
+import java.util.Scanner;
+
+
+ 
+interface Transaction {
+    void execute();
+}
+
+
+ 
+abstract class Account {
+    protected double balance;
+
+
+    public Account(double balance) {
+        this.balance = balance;
+    }
+
+
+    public double getBalance() {
+        return balance;
+    }
+
+
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposit Successful. New balance: " + balance);
+    }
+
+
+    public abstract void withdraw(double amount) throws InsufficientFundsException;
+}
+
+
+ 
+class InsufficientFundsException extends Exception {
+    public InsufficientFundsException(String message) {
+        super(message);
+    }
+}
+
+
+ 
+class SavingsAccount extends Account {
+    public SavingsAccount(double balance) {
+        super(balance);
+    }
+
+
+    
+    public void withdraw(double amount) throws InsufficientFundsException {
+        if (amount > balance) {
+            throw new InsufficientFundsException("Insufficient funds for withdrawal");
+        }
+        balance -= amount;
+        System.out.println("Withdrawal Successful. New balance: " + balance);
+    }
+}
+
+
+ 
+class CheckingAccount extends Account {
+    private double overdraftLimit;
+
+
+    public CheckingAccount(double balance, double overdraftLimit) {
+        super(balance);
+        this.overdraftLimit = overdraftLimit;
+    }
+
+
+     
+    public void withdraw(double amount) throws InsufficientFundsException {
+        if (amount > (balance + overdraftLimit)) {
+            throw new InsufficientFundsException("Insufficient funds for withdrawal");
+        }
+        balance -= amount;
+        System.out.println("Withdrawal Successful. New balance: " + balance);
+    }
+}
+
+
+ 
+class ATM implements Transaction {
+    private Account account;
+
+
+    public ATM(Account account) {
+        this.account = account;
+    }
+
+
+   
+    public void execute() {
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+
+        do {
+            System.out.println("\nATM Menu:");
+            System.out.println("1. Check Balance");
+            System.out.println("2. Deposit");
+            System.out.println("3. Withdraw");
+            System.out.println("4. Exit");
+
+
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Current Balance: " + account.getBalance());
+                    break;
+                case 2:
+                    try {
+                        System.out.print("Enter deposit amount: ");
+                        double depositAmount = scanner.nextDouble();
+                        account.deposit(depositAmount);
+                    } catch (Exception e) {
+                        System.out.println("Error: Invalid input for deposit");
+                        scanner.nextLine(); // consume the invalid input
+                    }
+                    break;
+                case 3:
+                    try {
+                        System.out.print("Enter withdrawal amount: ");
+                        double withdrawalAmount = scanner.nextDouble();
+                        account.withdraw(withdrawalAmount);
+                    } catch (InsufficientFundsException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    } catch (Exception e) {
+                        System.out.println("Error: Invalid input for withdrawal");
+                        scanner.nextLine(); // consume the invalid input
+                    }
+                    break;
+                case 4:
+                    System.out.println("Exiting ATM. Thank you!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 4);
+    }
+}
+
+
+ class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        
+        System.out.print("Enter initial balance for Savings Account: ");
+        double savingsInitialBalance = scanner.nextDouble();
+        Account savingsAccount = new SavingsAccount(savingsInitialBalance);
+
+
+       
+        System.out.print("Enter initial balance for Checking Account: ");
+        double checkingInitialBalance = scanner.nextDouble();
+        System.out.print("Enter overdraft limit for Checking Account: ");
+        double checkingOverdraftLimit = scanner.nextDouble();
+        Account checkingAccount = new CheckingAccount(checkingInitialBalance, checkingOverdraftLimit);
+
+
+ 
+        ATM savingsATM = new ATM(savingsAccount);
+        ATM checkingATM = new ATM(checkingAccount);
+
+
+       
+        System.out.println("Savings Account Transactions:");
+        savingsATM.execute();
+
+
+        System.out.println("\nChecking Account Transactions:");
+        checkingATM.execute();
+    }
+}
